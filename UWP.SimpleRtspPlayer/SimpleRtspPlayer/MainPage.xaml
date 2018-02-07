@@ -2,14 +2,48 @@
     x:Class="SimpleRtspPlayer.MainPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:SimpleRtspPlayer"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="using:SimpleRtspPlayer"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <NavigationView>
+    <Page.Resources>
+        <Flyout
+            x:Key="NewRtspStreamFlyout"
+            x:Name="NewRtspStreamFlyout"
+            LightDismissOverlayMode="On"
+            Placement="Full">
+            <StackPanel Orientation="Vertical">
+                <TextBlock x:Uid="EnterLinkTextBlock" Margin="0,0,0,10" />
+                <TextBox Margin="0,0,0,10" />
+                <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
+                    <Button
+                        x:Uid="OkButton"
+                        Width="150"
+                        Margin="0,0,10,0"
+                        Tapped="ButtonOkOnTapped" />
+                    <Button
+                        x:Uid="CancelButton"
+                        Width="150"
+                        Tapped="ButtonCancelOnTapped" />
+                </StackPanel>
+            </StackPanel>
+
+            <Flyout.FlyoutPresenterStyle>
+                <Style TargetType="FlyoutPresenter">
+                    <Setter Property="MaxHeight" Value="130" />
+                </Style>
+            </Flyout.FlyoutPresenterStyle>
+        </Flyout>
+    </Page.Resources>
+
+    <NavigationView IsSettingsVisible="False">
         <NavigationView.MenuItems>
-            <NavigationViewItem x:Uid="AddCameraNavItem"></NavigationViewItem>
+            <NavigationViewItem
+                x:Uid="AddCameraNavItem"
+                FlyoutBase.AttachedFlyout="{StaticResource NewRtspStreamFlyout}"
+                Icon="Add"
+                Tapped="AddNewStreamOnTapped" />
         </NavigationView.MenuItems>
     </NavigationView>
 </Page>

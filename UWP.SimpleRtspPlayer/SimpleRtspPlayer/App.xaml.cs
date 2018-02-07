@@ -7,8 +7,6 @@ using Windows.UI.Xaml.Navigation;
 
 namespace SimpleRtspPlayer
 {
-    using Windows.ApplicationModel.Core;
-
     /// <inheritdoc cref="Application" />
     /// <summary>
     /// Provides application-specific behavior to supplement the default Application class.
@@ -43,9 +41,6 @@ namespace SimpleRtspPlayer
         /// <param name="e">Details about the launch request and process.</param>
         protected override void OnLaunched(LaunchActivatedEventArgs e)
         {
-            var coreTitleBar = CoreApplication.GetCurrentView().TitleBar;
-            coreTitleBar.ExtendViewIntoTitleBar = true;
-
             // Do not repeat app initialization when the Window already has content,
             // just ensure that the window is active
             if (!(Window.Current.Content is Frame rootFrame))

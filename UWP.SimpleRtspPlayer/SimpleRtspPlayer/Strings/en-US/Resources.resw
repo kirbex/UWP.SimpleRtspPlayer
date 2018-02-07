@@ -123,4 +123,13 @@
   <data name="AppDisplayName" xml:space="preserve">
     <value>Simple RTSP Player</value>
   </data>
+  <data name="CancelButton.Content" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="EnterLinkTextBlock.Text" xml:space="preserve">
+    <value>Enter RTSP link</value>
+  </data>
+  <data name="OkButton.Content" xml:space="preserve">
+    <value>OK</value>
+  </data>
 </root>
