@@ -7,6 +7,8 @@ using Windows.UI.Xaml.Navigation;
 
 namespace SimpleRtspPlayer
 {
+    using Windows.UI.Popups;
+
     /// <inheritdoc cref="Application" />
     /// <summary>
     /// Provides application-specific behavior to supplement the default Application class.

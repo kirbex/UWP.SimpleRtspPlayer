@@ -123,11 +123,17 @@
   <data name="AppDisplayName" xml:space="preserve">
     <value>Simple RTSP Player</value>
   </data>
+  <data name="CamerasNavViewItemHeader.Content" xml:space="preserve">
+    <value>Cameras</value>
+  </data>
   <data name="CancelButton.Content" xml:space="preserve">
     <value>Cancel</value>
   </data>
+  <data name="EnterCameraNameTextBlock.Text" xml:space="preserve">
+    <value>Name</value>
+  </data>
   <data name="EnterLinkTextBlock.Text" xml:space="preserve">
-    <value>Enter RTSP link</value>
+    <value>RTSP link</value>
   </data>
   <data name="OkButton.Content" xml:space="preserve">
     <value>OK</value>
