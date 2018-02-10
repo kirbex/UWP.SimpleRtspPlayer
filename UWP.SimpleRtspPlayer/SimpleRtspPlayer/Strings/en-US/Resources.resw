@@ -123,6 +123,9 @@
   <data name="AppDisplayName" xml:space="preserve">
     <value>Simple RTSP Player</value>
   </data>
+  <data name="AreYouSureToRemove.Text" xml:space="preserve">
+    <value>Are you sure you want to remove camera?</value>
+  </data>
   <data name="CamerasNavViewItemHeader.Content" xml:space="preserve">
     <value>Cameras</value>
   </data>
@@ -137,5 +140,8 @@
   </data>
   <data name="OkButton.Content" xml:space="preserve">
     <value>OK</value>
+  </data>
+  <data name="RemoveCameraNavItem.Content" xml:space="preserve">
+    <value>Remove camera</value>
   </data>
 </root>

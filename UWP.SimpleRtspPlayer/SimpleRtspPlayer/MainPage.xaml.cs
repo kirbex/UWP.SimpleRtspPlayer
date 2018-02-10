@@ -13,6 +13,10 @@ namespace SimpleRtspPlayer
 
     public sealed partial class MainPage
     {
+        private NavigationViewItem selecteViewItem;
+        private NavigationViewItem addRtspNavigationViewItem;
+        private NavigationViewItem removeNavigationItem;
+
         public MainPage()
         {
             InitializeComponent();
@@ -20,6 +24,17 @@ namespace SimpleRtspPlayer
             AddNavigationViewItemHeader();
             IconPicker.ItemsSource = Enum.GetValues(typeof(Symbol)).Cast<Symbol>();
             IconPicker.SelectedItem = Symbol.Home;
+        }
+
+        public NavigationViewItem SelectedItem
+        {
+            get => selecteViewItem;
+            set
+            {
+                if (value.Equals(addRtspNavigationViewItem) || value.Equals(removeNavigationItem))
+                    NavigationView.SelectedItem = selecteViewItem;
+                else selecteViewItem = value;
+            }
         }
 
         public ObservableCollection<NavigationViewItemBase> MenuItems { get; set; } =
@@ -30,14 +45,22 @@ namespace SimpleRtspPlayer
             FlyoutBase.ShowAttachedFlyout((FrameworkElement)sender);
         }
 
+        private static void RemoveStreamOnTapped(object sender, TappedRoutedEventArgs e)
+        {
+            FlyoutBase.ShowAttachedFlyout((FrameworkElement)sender);
+        }
+
         private void ButtonOkOnTapped(object sender, TappedRoutedEventArgs e)
         {
-            MenuItems.Add(
-                new NavigationViewItem
-                    {
-                        Content = CameraName.Text,
-                        Icon = new SymbolIcon((Symbol)(IconPicker.SelectedItem ?? Symbol.Home))
-                    });
+            var navItem = new NavigationViewItem
+                              {
+                                  Content = CameraName.Text,
+                                  Icon = new SymbolIcon(
+                                      (Symbol)(IconPicker.SelectedItem ?? Symbol.Home))
+                              };
+            navItem.Tapped += CameraTapped;
+
+            MenuItems.Add(navItem);
             NewRtspStreamFlyout.Hide();
         }
 
@@ -48,16 +71,16 @@ namespace SimpleRtspPlayer
 
         private void AddAddMenuItem()
         {
-            var navItem = (NavigationViewItem)XamlReader.Load(
+            addRtspNavigationViewItem = (NavigationViewItem)XamlReader.Load(
                 "<NavigationViewItem "
                 + "xmlns=\"http://schemas.microsoft.com/winfx/2006/xaml/presentation\" "
                 + "xmlns:x=\"http://schemas.microsoft.com/winfx/2006/xaml\" "
                 + "x:Uid=\"AddCameraNavItem\" "
                 + "Icon=\"Add\" />");
 
-            FlyoutBase.SetAttachedFlyout(navItem, (Flyout)Resources["NewRtspStreamFlyout"]);
-            navItem.Tapped += AddNewStreamOnTapped;
-            MenuItems.Add(navItem);
+            FlyoutBase.SetAttachedFlyout(addRtspNavigationViewItem, (Flyout)Resources["NewRtspStreamFlyout"]);
+            addRtspNavigationViewItem.Tapped += AddNewStreamOnTapped;
+            MenuItems.Add(addRtspNavigationViewItem);
         }
 
         private void AddNavigationViewItemHeader()
@@ -70,6 +93,41 @@ namespace SimpleRtspPlayer
                 + "Margin=\"33,0,0,0\" />");
 
             MenuItems.Add(navItem);
+        }
+
+        private void CameraTapped(object sender, TappedRoutedEventArgs e)
+        {
+            AddRemoveMenuItem();
+        }
+
+        private void AddRemoveMenuItem()
+        {
+            if (removeNavigationItem == null)
+            {
+                removeNavigationItem = (NavigationViewItem)XamlReader.Load(
+                    "<NavigationViewItem " + "xmlns=\"http://schemas.microsoft.com/winfx/2006/xaml/presentation\" "
+                    + "xmlns:x=\"http://schemas.microsoft.com/winfx/2006/xaml\" " 
+                    + "x:Uid=\"RemoveCameraNavItem\" "
+                    + "Icon=\"Remove\" />");
+
+                FlyoutBase.SetAttachedFlyout(removeNavigationItem, (Flyout)Resources["RemoveRtspStreamFlyout"]);
+                removeNavigationItem.Tapped += RemoveStreamOnTapped;
+            }
+
+            if (!MenuItems.Contains(removeNavigationItem)) MenuItems.Insert(1, removeNavigationItem);
+        }
+
+        private void RemoveOkTapped(object sender, TappedRoutedEventArgs e)
+        {
+            MenuItems.Remove(SelectedItem);
+
+            if (MenuItems.Count == 2) MenuItems.Remove(removeNavigationItem);
+            RemoveRtspStreamFlyout.Hide();
+        }
+
+        private void RemoveCancelTapped(object sender, TappedRoutedEventArgs e)
+        {
+            RemoveRtspStreamFlyout.Hide();
         }
     }
 }
