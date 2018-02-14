@@ -126,6 +126,9 @@
   <data name="AreYouSureToRemove.Text" xml:space="preserve">
     <value>Are you sure you want to remove camera?</value>
   </data>
+  <data name="CameraSameNameError" xml:space="preserve">
+    <value>Sorry, but camera with the same name already exists. Please, give your new camera unique name.</value>
+  </data>
   <data name="CamerasNavViewItemHeader.Content" xml:space="preserve">
     <value>Cameras</value>
   </data>

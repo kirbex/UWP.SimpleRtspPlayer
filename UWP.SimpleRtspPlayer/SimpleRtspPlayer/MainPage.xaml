@@ -9,10 +9,6 @@
     mc:Ignorable="d">
 
     <Page.Resources>
-        <!--<Style TargetType="NavigationViewItem">
-            <Setter Property=""></Setter>
-        </Style>-->
-        
         <Flyout
             x:Key="RemoveRtspStreamFlyout"
             x:Name="RemoveRtspStreamFlyout"
@@ -39,7 +35,10 @@
             x:Name="NewRtspStreamFlyout"
             LightDismissOverlayMode="On"
             Placement="Full">
-            <StackPanel MaxWidth="430" Orientation="Vertical">
+            <StackPanel
+                MaxWidth="430"
+                Loaded="FrameworkElement_OnLoaded"
+                Orientation="Vertical">
                 <TextBlock x:Uid="EnterCameraNameTextBlock" Margin="0,0,0,10" />
                 <Grid Margin="0,0,0,10">
                     <TextBox x:Name="CameraName" Margin="0,0,70,0" />
@@ -52,7 +51,7 @@
                     </ComboBox>
                 </Grid>
                 <TextBlock x:Uid="EnterLinkTextBlock" Margin="0,0,0,10" />
-                <TextBox Margin="0,0,0,10" />
+                <TextBox x:Name="CameraUri" Margin="0,0,0,10" />
 
                 <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
                     <Button
@@ -76,5 +75,9 @@
         </Flyout>
     </Page.Resources>
 
-    <NavigationView x:Name="NavigationView" IsSettingsVisible="False" SelectedItem="{x:Bind SelectedItem}" MenuItemsSource="{x:Bind MenuItems}" />
+    <NavigationView
+        x:Name="NavigationView"
+        IsSettingsVisible="False"
+        MenuItemsSource="{x:Bind MenuItems}"
+        SelectionChanged="NavigationView_OnSelectionChanged" />
 </Page>
