@@ -157,8 +157,6 @@
                                             x:Name="MenuItemsHost"
                                             Grid.Row="3"
                                             Margin="0,0,0,20"
-                                            AllowDrop="True"
-                                            CanReorderItems="True"
                                             IsItemClickEnabled="True"
                                             ItemContainerStyle="{TemplateBinding MenuItemContainerStyle}"
                                             ItemContainerStyleSelector="{TemplateBinding MenuItemContainerStyleSelector}"

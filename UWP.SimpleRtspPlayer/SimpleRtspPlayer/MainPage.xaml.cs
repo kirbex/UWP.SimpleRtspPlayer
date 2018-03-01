@@ -53,6 +53,22 @@ namespace SimpleRtspPlayer
                 return;
             }
 
+            if (string.IsNullOrEmpty(CameraName.Text))
+            {
+                var loader = new ResourceLoader();
+                MessageDialog dialog = new MessageDialog(loader.GetString("CameraNameIsEmpty"));
+                await dialog.ShowAsync();
+                return;
+            }
+
+            if (string.IsNullOrEmpty(CameraUri.Text))
+            {
+                var loader = new ResourceLoader();
+                MessageDialog dialog = new MessageDialog(loader.GetString("CameraUriIsEmpty"));
+                await dialog.ShowAsync();
+                return;
+            }
+
             var navItem = AddCameraNavItem();
 
             if (navItem.Content != null)
@@ -69,9 +85,10 @@ namespace SimpleRtspPlayer
                                   Content = name ?? CameraName.Text,
                                   Icon = new SymbolIcon(
                                       icon ?? (Symbol)(IconPicker.SelectedItem ?? Symbol.Home)),
-                                  Tag = cameraUri ?? CameraUri.Text,
-                                  CanDrag = true
+                                  Tag = cameraUri ?? CameraUri.Text
                               };
+
+            navItem.SetValue(ToolTipService.ToolTipProperty, navItem.Tag);
 
             MenuItems.Add(navItem);
             return navItem;
@@ -94,11 +111,6 @@ namespace SimpleRtspPlayer
 
             MenuItems.Remove(SelectedNavItem);
 
-            RemoveRtspStreamFlyout.Hide();
-        }
-
-        private void RemoveCancelTapped(object sender, TappedRoutedEventArgs e)
-        {
             RemoveRtspStreamFlyout.Hide();
         }
 

@@ -126,11 +126,17 @@
   <data name="AreYouSureToRemove.Text" xml:space="preserve">
     <value>Are you sure you want to remove camera?</value>
   </data>
+  <data name="CameraNameIsEmpty" xml:space="preserve">
+    <value>Camera name can't be empty.</value>
+  </data>
   <data name="CameraSameNameError" xml:space="preserve">
     <value>Sorry, but camera with the same name already exists. Please, give your new camera unique name.</value>
   </data>
   <data name="CamerasNavViewItemHeader.Content" xml:space="preserve">
     <value>Cameras</value>
+  </data>
+  <data name="CameraUriIsEmpty" xml:space="preserve">
+    <value>Camera uri can't be empty.</value>
   </data>
   <data name="CancelButton.Content" xml:space="preserve">
     <value>Cancel</value>
